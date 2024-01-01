@@ -1,6 +1,9 @@
+import com.android.build.gradle.internal.scope.publishBuildArtifacts
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -30,7 +33,23 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    configure<PublishingExtension> {
+        publications.create<MavenPublication>("myPlugin") {
+            groupId = "io.github.arjesh.permissionManager"
+            artifactId = "permissionManager"
+            version = "1.0.4"
+            pom.packaging = "jar"
+            artifact("$buildDir/libs/permissionManager.jar")
+        }
+        repositories {
+            mavenLocal()
+        }
+    }
+
+
 }
+
 
 dependencies {
 
@@ -40,4 +59,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.7.2")
 }
