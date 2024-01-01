@@ -35,12 +35,12 @@ android {
     }
 
     configure<PublishingExtension> {
-        publications.create<MavenPublication>("myPlugin") {
+        publications.create<MavenPublication>("maven") {
             groupId = "io.github.arjesh.permissionManager"
             artifactId = "permissionManager"
             version = "1.0.4"
             pom.packaging = "jar"
-            artifact("$buildDir/libs/permissionManager.jar")
+            artifact("$buildDir/libs/maven.jar")
         }
         repositories {
             mavenLocal()
