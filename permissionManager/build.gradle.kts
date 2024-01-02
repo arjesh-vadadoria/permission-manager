@@ -66,8 +66,8 @@ project.afterEvaluate {
     configure<PublishingExtension> {
         publications.create<MavenPublication>("permissionManager") {
             components.getByName("release")
-            groupId = "io.github.arjesh"
-            artifactId = "permissionManager"
+            groupId = "com.github.arjesh-vadadoria"
+            artifactId = "permission-manager"
             version = "1.0.4-alpha.3"
         }
         repositories {
