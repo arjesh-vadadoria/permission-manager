@@ -68,7 +68,7 @@ project.afterEvaluate {
             from(components["release"])
             groupId = "com.github.arjesh-vadadoria"
             artifactId = "permission-manager"
-            version = "1.0.4-alpha.5"
+            version = "1.0.4-alpha.6"
         }
     }
 }
