@@ -40,20 +40,40 @@ android {
 //        archivesName = "sources"
 //    }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
+//    configure<PublishingExtension> {
+//        publications.create<MavenPublication>("permissionManager") {
+//            components.getByName("release")
+//            groupId = "io.github.arjesh"
+//            artifactId = "permissionManager"
+//            version = "1.0.4-alpha.2"
+//        }
+//        repositories {
+//            mavenLocal()
+//        }
+//    }
+
+
+}
+
+project.afterEvaluate {
     configure<PublishingExtension> {
         publications.create<MavenPublication>("permissionManager") {
+            components.getByName("release")
             groupId = "io.github.arjesh"
             artifactId = "permissionManager"
-            version = "1.0.4-alpha.2"
-//            pom.packaging = "jar"
-//            artifact("$buildDir/libs/maven.jar")
+            version = "1.0.4-alpha.3"
         }
         repositories {
             mavenLocal()
         }
     }
-
-
 }
 
 
