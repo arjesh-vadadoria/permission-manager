@@ -1,6 +1,10 @@
+import com.android.build.gradle.internal.scope.publishBuildArtifacts
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
 
 android {
@@ -18,8 +22,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -30,7 +33,46 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    task("sourceJar") {
+        sourceSets["main"].java
+        archivesName = "sources"
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
+//    configure<PublishingExtension> {
+//        publications.create<MavenPublication>("permissionManager") {
+//            components.getByName("release")
+//            groupId = "io.github.arjesh"
+//            artifactId = "permissionManager"
+//            version = "1.0.4-alpha.2"
+//        }
+//        repositories {
+//            mavenLocal()
+//        }
+//    }
+
+
 }
+
+project.afterEvaluate {
+    configure<PublishingExtension> {
+        publications.create<MavenPublication>("permission-manager") {
+//            components.getByName("release")
+            from(components["release"])
+            groupId = "com.github.arjesh-vadadoria"
+            artifactId = "permission-manager"
+            version = "1.0.4-alpha.6"
+        }
+    }
+}
+
 
 dependencies {
 
@@ -40,4 +82,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
 }
