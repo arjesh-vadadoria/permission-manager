@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.scope.publishBuildArtifacts
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 
 plugins {
     id("com.android.library")
@@ -34,13 +35,18 @@ android {
         jvmTarget = "17"
     }
 
+//    task("sourceJar") {
+//        sourceSets["main"].java.getSourceFiles()
+//        archivesName = "sources"
+//    }
+
     configure<PublishingExtension> {
-        publications.create<MavenPublication>("maven") {
-            groupId = "io.github.arjesh.permissionManager"
+        publications.create<MavenPublication>("permissionManager") {
+            groupId = "io.github.arjesh"
             artifactId = "permissionManager"
-            version = "1.0.4"
-            pom.packaging = "jar"
-            artifact("$buildDir/libs/maven.jar")
+            version = "1.0.4-alpha.2"
+//            pom.packaging = "jar"
+//            artifact("$buildDir/libs/maven.jar")
         }
         repositories {
             mavenLocal()
@@ -59,6 +65,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
 }
