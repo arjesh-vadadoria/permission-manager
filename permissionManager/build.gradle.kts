@@ -22,8 +22,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -35,10 +34,10 @@ android {
         jvmTarget = "17"
     }
 
-//    task("sourceJar") {
-//        sourceSets["main"].java.getSourceFiles()
-//        archivesName = "sources"
-//    }
+    task("sourceJar") {
+        sourceSets["main"].java
+        archivesName = "sources"
+    }
 
     publishing {
         singleVariant("release") {
@@ -64,14 +63,11 @@ android {
 
 project.afterEvaluate {
     configure<PublishingExtension> {
-        publications.create<MavenPublication>("permissionManager") {
+        publications.create<MavenPublication>("permission-manager") {
             components.getByName("release")
             groupId = "com.github.arjesh-vadadoria"
             artifactId = "permission-manager"
-            version = "1.0.4-alpha.4"
-        }
-        repositories {
-            mavenLocal()
+            version = "1.0.4-alpha.5"
         }
     }
 }
