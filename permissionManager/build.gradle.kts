@@ -68,7 +68,7 @@ project.afterEvaluate {
             components.getByName("release")
             groupId = "com.github.arjesh-vadadoria"
             artifactId = "permission-manager"
-            version = "1.0.4-alpha.3"
+            version = "1.0.4-alpha.4"
         }
         repositories {
             mavenLocal()
